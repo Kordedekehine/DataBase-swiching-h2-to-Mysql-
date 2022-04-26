@@ -14,36 +14,38 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
-    @PostMapping("/department")
+    @PostMapping("/departments")
     public Department saveDepartment(@RequestBody Department department){
       //  DepartmentService service = new DepartmentServiceImpl(); We don't wanna go this way,we autowire
         return departmentService.saveDepartment(department);
     }
 
-    @GetMapping("/department")
+    @GetMapping("/departments")
     public List<Department> getDepartmentList(){
         return departmentService.getDepartmenList();
     }
 
-    @GetMapping(path = "/department/{Id}")
-    public Department getDepartmentById(@PathVariable ("/department/{Id}") Long departmentId){
+    @GetMapping(path = "/departments/{departmentId}")
+    public Department getDepartmentById(@PathVariable Long departmentId){
         return departmentService.getDepartmentById(departmentId);
     }
 
-    @DeleteMapping("/department/{id}")
-    public String deleteDepartmentById(@PathVariable ("id") Long departmentId){
+    @DeleteMapping("/departments/{departmentId}")
+    public String deleteDepartmentById(@PathVariable Long departmentId){
         departmentService.deleteDepartmentById(departmentId);
         return "Successfully deletes department";
     }
 
-    @PutMapping("/department/{id}")
+    @PutMapping("/departments/{departmentId}")
     public Department updateDepartment(@PathVariable Long departmentId,
                                        @RequestBody Department department){
         return departmentService.updateDepartment(departmentId,department);
     }
 
-    @GetMapping("/department/name/{name}")
+    @GetMapping("/departments/name/{name}")
     public Department getDepartmentByName(@PathVariable("name") String departmentName) {
         return departmentService.getDepartmentByName(departmentName);
     }
+
+
 }
