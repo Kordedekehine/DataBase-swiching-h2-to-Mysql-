@@ -3,6 +3,8 @@ package KoredeWebApp.WebAppProject.Controller;
 import KoredeWebApp.WebAppProject.Entity.Department;
 import KoredeWebApp.WebAppProject.Service.DepartmentService;
 import KoredeWebApp.WebAppProject.Service.DepartmentServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,36 +17,39 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
-    @PostMapping("/departments")
+
+    private final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
+
+    @PostMapping("/department")
     public Department saveDepartment(@Valid @RequestBody Department department){ //We also add validations here
         //It will be validated if and only if name is not empty
-      //  DepartmentService service = new DepartmentServiceImpl(); We don't wanna go this way,we autowire
+      LOGGER.info("save department message inside the controller class");//Pop up message any time we want to log on the method
         return departmentService.saveDepartment(department);
     }
 
-    @GetMapping("/departments")
+    @GetMapping("/department")
     public List<Department> getDepartmentList(){
-        return departmentService.getDepartmenList();
+        return departmentService.getDepartmentList();
     }
 
-    @GetMapping(path = "/departments/{departmentId}")
+    @GetMapping(path = "/department/{departmentId}")
     public Department getDepartmentById(@PathVariable Long departmentId){
         return departmentService.getDepartmentById(departmentId);
     }
 
-    @DeleteMapping("/departments/{departmentId}")
+    @DeleteMapping("/department/{departmentId}")
     public String deleteDepartmentById(@PathVariable Long departmentId){
         departmentService.deleteDepartmentById(departmentId);
         return "Successfully deletes department";
     }
 
-    @PutMapping("/departments/{departmentId}")
+    @PutMapping("/department/{departmentId}")
     public Department updateDepartment(@PathVariable Long departmentId,
                                        @RequestBody Department department){
         return departmentService.updateDepartment(departmentId,department);
     }
 
-    @GetMapping("/departments/name/{name}")
+    @GetMapping("/department/name/{name}")
     public Department getDepartmentByName(@PathVariable("name") String departmentName) {
         return departmentService.getDepartmentByName(departmentName);
     }
