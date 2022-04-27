@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Department {
@@ -12,6 +13,7 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long departmentId;
 
+    @NotBlank(message = "Please add department name") //we use  hibernate validator for this to emphasize name input
     private String departmentName;
     private String departmentAddress;
     private String departmentCode;

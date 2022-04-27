@@ -6,6 +6,7 @@ import KoredeWebApp.WebAppProject.Service.DepartmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,7 +16,8 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @PostMapping("/departments")
-    public Department saveDepartment(@RequestBody Department department){
+    public Department saveDepartment(@Valid @RequestBody Department department){ //We also add validations here
+        //It will be validated if and only if name is not empty
       //  DepartmentService service = new DepartmentServiceImpl(); We don't wanna go this way,we autowire
         return departmentService.saveDepartment(department);
     }
