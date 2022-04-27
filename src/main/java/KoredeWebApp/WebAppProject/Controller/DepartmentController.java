@@ -1,6 +1,7 @@
 package KoredeWebApp.WebAppProject.Controller;
 
 import KoredeWebApp.WebAppProject.Entity.Department;
+import KoredeWebApp.WebAppProject.ErrorHandler.DepartmentNotFoundException;
 import KoredeWebApp.WebAppProject.Service.DepartmentService;
 import KoredeWebApp.WebAppProject.Service.DepartmentServiceImpl;
 import org.slf4j.Logger;
@@ -28,12 +29,12 @@ public class DepartmentController {
     }
 
     @GetMapping("/department")
-    public List<Department> getDepartmentList(){
+    public List<Department> getDepartmentList() throws DepartmentNotFoundException {
         return departmentService.getDepartmentList();
     }
 
     @GetMapping(path = "/department/{departmentId}")
-    public Department getDepartmentById(@PathVariable Long departmentId){
+    public Department getDepartmentById(@PathVariable Long departmentId) throws DepartmentNotFoundException {
         return departmentService.getDepartmentById(departmentId);
     }
 
@@ -50,7 +51,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/department/name/{name}")
-    public Department getDepartmentByName(@PathVariable("name") String departmentName) {
+    public Department getDepartmentByName(@PathVariable("name") String departmentName) throws DepartmentNotFoundException {
         return departmentService.getDepartmentByName(departmentName);
     }
 

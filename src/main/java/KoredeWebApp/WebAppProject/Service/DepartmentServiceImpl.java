@@ -1,12 +1,14 @@
 package KoredeWebApp.WebAppProject.Service;
 
 import KoredeWebApp.WebAppProject.Entity.Department;
+import KoredeWebApp.WebAppProject.ErrorHandler.DepartmentNotFoundException;
 import KoredeWebApp.WebAppProject.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService{
@@ -16,23 +18,38 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public Department saveDepartment(Department department) {
-      return departmentRepository.save(department);
+
+     return departmentRepository.save(department);
     }
 
     @Override
-    public List<Department> getDepartmentList() {
-        return departmentRepository.findAll();
+    public List<Department> getDepartmentList() throws DepartmentNotFoundException {
+
+     List<Department> fetchDepartmentList =  departmentRepository.findAll();
+
+     if (fetchDepartmentList.isEmpty()){
+         throw new DepartmentNotFoundException("NO DATA IN THE LIST",new Throwable("SAVE DATA TO FETCH"));
+     }
+     return fetchDepartmentList;
     }
 
     @Override
-    public Department getDepartmentById(Long departmentId) {
-        return departmentRepository.findById(departmentId).get();
+    public Department getDepartmentById(Long departmentId) throws DepartmentNotFoundException {
+
+//        return departmentRepository.findById(departmentId).get();
+        Optional<Department> department = departmentRepository.findById(departmentId);
+
+        if (!department.isPresent()){
+            throw new DepartmentNotFoundException("DEPARTMENT ID NOT FOUND");
+        }
+        return department.get();
     }
 
     @Override
     public void deleteDepartmentById(Long departmentId) {
         departmentRepository.deleteById(departmentId);
     }
+
 
     @Override
     public Department updateDepartment(Long departmentId, Department department){
@@ -57,8 +74,16 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public Department getDepartmentByName(String departmentName) {
-      return departmentRepository.findByDepartmentName(departmentName);
+    public Department getDepartmentByName(String departmentName) throws DepartmentNotFoundException {
+      //return departmentRepository.findByDepartmentName(departmentName);
+
+        Optional<Department> department = Optional.ofNullable(departmentRepository.findByDepartmentName
+                (departmentName));
+
+        if (!department.isPresent()){
+            throw new DepartmentNotFoundException("CANNOT FIND NAME");
+        }
+        return department.get();
     }
 
 
