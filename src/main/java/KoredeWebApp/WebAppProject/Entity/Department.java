@@ -1,6 +1,9 @@
 package KoredeWebApp.WebAppProject.Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
@@ -12,6 +15,9 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Data //This includes all the getters and setters,hashcode,requiredArgsConstructor so there is no need for it
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder //Builder is meant for creating an object when we have different properties
 public class Department {
 
     @Id

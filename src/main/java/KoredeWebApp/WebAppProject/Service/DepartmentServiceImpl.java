@@ -74,14 +74,14 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public Department getDepartmentByName(String departmentName) throws DepartmentNotFoundException {
+    public Department getDepartmentByName(String departmentName) {
       //return departmentRepository.findByDepartmentName(departmentName);
 
         Optional<Department> department = Optional.ofNullable(departmentRepository.findByDepartmentName
                 (departmentName));
 
         if (!department.isPresent()){
-            throw new DepartmentNotFoundException("CANNOT FIND NAME");
+            System.out.println("Cannot find name");
         }
         return department.get();
     }
