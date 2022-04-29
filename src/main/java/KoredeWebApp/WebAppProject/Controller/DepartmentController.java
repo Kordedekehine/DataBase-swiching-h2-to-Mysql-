@@ -3,7 +3,7 @@ package KoredeWebApp.WebAppProject.Controller;
 import KoredeWebApp.WebAppProject.Entity.Department;
 import KoredeWebApp.WebAppProject.ErrorHandler.DepartmentNotFoundException;
 import KoredeWebApp.WebAppProject.Service.DepartmentService;
-import KoredeWebApp.WebAppProject.Service.DepartmentServiceImpl;
+import KoredeWebApp.WebAppProject.repository.DepartmentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,17 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
-
     private final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
 
     @PostMapping("/department")
-    public Department saveDepartment(@Valid @RequestBody Department department){ //We also add validations here
+    public Department saveDepartment(@Valid @RequestBody Department department) { //We also add validations here
         //It will be validated if and only if name is not empty
       LOGGER.info("save department message inside the controller class");//Pop up message any time we want to log on the method
         return departmentService.saveDepartment(department);
     }
 
     @GetMapping("/department")
-    public List<Department> getDepartmentList() throws DepartmentNotFoundException {
+    public List<Department> getDepartmentList()  {
         return departmentService.getDepartmentList();
     }
 
@@ -51,9 +50,12 @@ public class DepartmentController {
     }
 
     @GetMapping("/department/name/{name}")
-    public Department getDepartmentByName(@PathVariable("name") String departmentName) throws DepartmentNotFoundException {
+    public Department getDepartmentByName(@PathVariable("name") String departmentName)  {
         return departmentService.getDepartmentByName(departmentName);
     }
 
-
+//    @GetMapping("/department/name/{name}")
+//    public Department findByDepartmentNameIgnoreCase (@PathVariable("name") String departmentName)  {
+//        return departmentService.getDepartmentByName(departmentName);
+//    }
 }

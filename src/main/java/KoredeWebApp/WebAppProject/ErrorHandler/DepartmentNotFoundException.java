@@ -1,6 +1,7 @@
 package KoredeWebApp.WebAppProject.ErrorHandler;
 
-public class DepartmentNotFoundException extends Exception{
+public class DepartmentNotFoundException extends Exception {
+
     public DepartmentNotFoundException() {
         super();
     }

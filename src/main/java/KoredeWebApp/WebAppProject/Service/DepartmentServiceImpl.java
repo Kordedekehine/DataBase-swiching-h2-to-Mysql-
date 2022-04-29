@@ -18,29 +18,26 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public Department saveDepartment(Department department) {
-
-     return departmentRepository.save(department);
+//     return departmentRepository.save(department);
+        return departmentRepository.save(department);
     }
 
+
     @Override
-    public List<Department> getDepartmentList() throws DepartmentNotFoundException {
+    public List<Department> getDepartmentList()  {
 
-     List<Department> fetchDepartmentList =  departmentRepository.findAll();
+     return departmentRepository.findAll();
 
-     if (fetchDepartmentList.isEmpty()){
-         throw new DepartmentNotFoundException("NO DATA IN THE LIST",new Throwable("SAVE DATA TO FETCH"));
-     }
-     return fetchDepartmentList;
     }
 
     @Override
     public Department getDepartmentById(Long departmentId) throws DepartmentNotFoundException {
+        //return departmentRepository.findById(departmentId).get();
 
-//        return departmentRepository.findById(departmentId).get();
         Optional<Department> department = departmentRepository.findById(departmentId);
 
         if (!department.isPresent()){
-            throw new DepartmentNotFoundException("DEPARTMENT ID NOT FOUND");
+            throw new DepartmentNotFoundException("ERROR! CHECK DATABASE IF EMPTY");
         }
         return department.get();
     }
@@ -75,16 +72,11 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public Department getDepartmentByName(String departmentName) {
-      //return departmentRepository.findByDepartmentName(departmentName);
-
-        Optional<Department> department = Optional.ofNullable(departmentRepository.findByDepartmentName
-                (departmentName));
-
-        if (!department.isPresent()){
-            System.out.println("Cannot find name");
-        }
-        return department.get();
+        return departmentRepository.findByDepartmentName(departmentName);
     }
 
-
+//    @Override
+//    public Department findByDepartmentNameIgnoreCase(String departmentName) {
+//        return departmentRepository.findByDepartmentIgnoreCase(departmentName);
+//    }
 }
