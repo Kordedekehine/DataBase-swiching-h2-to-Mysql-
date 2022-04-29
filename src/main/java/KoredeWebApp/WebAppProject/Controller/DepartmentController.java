@@ -28,7 +28,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/department")
-    public List<Department> getDepartmentList()  {
+    public List<Department> getDepartmentList() throws DepartmentNotFoundException  {
         return departmentService.getDepartmentList();
     }
 
@@ -38,9 +38,8 @@ public class DepartmentController {
     }
 
     @DeleteMapping("/department/{departmentId}")
-    public String deleteDepartmentById(@PathVariable Long departmentId){
-        departmentService.deleteDepartmentById(departmentId);
-        return "Successfully deletes department";
+    public void deleteDepartmentById(@PathVariable Long departmentId)  {
+       departmentService.deleteDepartmentById(departmentId);
     }
 
     @PutMapping("/department/{departmentId}")
@@ -50,7 +49,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/department/name/{name}")
-    public Department getDepartmentByName(@PathVariable("name") String departmentName)  {
+    public Department getDepartmentByName(@PathVariable("name") String departmentName) throws DepartmentNotFoundException {
         return departmentService.getDepartmentByName(departmentName);
     }
 

@@ -9,15 +9,15 @@ import java.util.List;
 public interface DepartmentService {
     Department saveDepartment(Department department) ;
 
-    List<Department> getDepartmentList() ;
+    List<Department> getDepartmentList() throws DepartmentNotFoundException ;
 
     Department getDepartmentById(Long departmentId) throws DepartmentNotFoundException;
 
-   public void deleteDepartmentById(Long departmentId);
+   public void deleteDepartmentById(Long departmentId) ;
 
    public Department updateDepartment(Long departmentId, Department department);
 
-   public Department getDepartmentByName(String departmentName);
+   public Department getDepartmentByName(String departmentName) throws DepartmentNotFoundException;
 
 //   public  Department findByDepartmentNameIgnoreCase(String departmentName);
 
