@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 @Data //This includes all the getters and setters,hashcode,requiredArgsConstructor so there is no need for it
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder //Builder is meant for creating an object when we have different properties
 public class Department {
 
     @Id
@@ -32,36 +33,4 @@ public class Department {
     private String departmentAddress;
     private String departmentCode;
 
-
-    public Long getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
-
-    public String getDepartmentAddress() {
-        return departmentAddress;
-    }
-
-    public void setDepartmentAddress(String departmentAddress) {
-        this.departmentAddress = departmentAddress;
-    }
-
-    public String getDepartmentCode() {
-        return departmentCode;
-    }
-
-    public void setDepartmentCode(String departmentCode) {
-        this.departmentCode = departmentCode;
-    }
 }
