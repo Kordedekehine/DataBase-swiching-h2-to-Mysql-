@@ -9,6 +9,13 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+//Hi Salami,
+//
+//        I checked out the department repository test. And I noticed your @beforeEach annotation is doing something very strange. Please clean every line of code in the @beforeEach. Your @beforeEach annotation should have something like this only:
+//
+
+//
+//        Try this and run the code again.
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -20,16 +27,13 @@ class DepartmentRepositoryTest {
     @Autowired
     private TestEntityManager testEntityManager;
 
-    @BeforeEach
-    void setUp() {
-Department department = new Department();
-department.setDepartmentId(1L);
-department.setDepartmentName("Mechanical Engineering");
-department.setDepartmentAddress("Akoka");
-department.setDepartmentCode("532");
 
-        testEntityManager.persist(department);
-    }
+    private Department department;
+
+@BeforeEach
+public void initSetUp(){
+        department =  new Department();
+        }
 
 
     @Test
